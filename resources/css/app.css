@@ -1,3 +1,18 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+.answered {
+    @apply border border-green-500;
+}
+
+.answered strong, .answered span {
+    @apply text-green-500;
+}
+
+.answer-accepted {
+    @apply border border-green-500 bg-green-500;
+}
+
+.answer-accepted strong, .answer-accepted span {
+    @apply text-gray-100;
+}
