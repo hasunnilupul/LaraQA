@@ -40,13 +40,13 @@
                                         class="text-gray-600 hover:text-gray-800 hover:underline">{{ $question->title }}</a>
                                 </h2>
                                 <div class="flex ml-auto">
-                                    @if (Auth::user()->can('update-question', $question))
+                                    @can('update-question', $question)
                                         <a href="{{ route('questions.edit', $question->id) }}"
                                             class="px-2 py-1 mr-2 border border-blue-500 text-gray-600 rounded text-sm font-semibold hover:bg-blue-500 hover:text-gray-100">
                                             Edit
                                         </a>
-                                    @endif
-                                    @if (Auth::user()->can('update-question', $question))
+                                    @endcan
+                                    @can('update-question', $question)
                                         <form action="{{ route('questions.destroy', $question->id) }}" method="post">
                                             @method('DELETE')
                                             @csrf
@@ -56,7 +56,7 @@
                                                 Delete
                                             </button>
                                         </form>
-                                    @endif
+                                    @endcan
                                 </div>
                             </div>
                             <div class="flex items-baseline mt-1 sm:mt-0 text-sm text-gray-500">
