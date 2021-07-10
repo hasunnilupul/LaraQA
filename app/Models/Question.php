@@ -57,4 +57,5 @@ class Question extends Model
     {
         return Str::markdown($this->body);
     }
+
 }
