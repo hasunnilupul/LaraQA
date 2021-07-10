@@ -5,7 +5,8 @@
     @apply border border-green-500;
 }
 
-.answered strong, .answered span {
+.answered strong,
+.answered span {
     @apply text-green-500;
 }
 
@@ -13,6 +14,15 @@
     @apply border border-green-500 bg-green-500;
 }
 
-.answer-accepted strong, .answer-accepted span {
+.answer-accepted strong,
+.answer-accepted span {
+    @apply text-gray-100;
+}answer-accepted span {
+    @apply text-gray-100;
+}answer-accepted span {
+    @apply text-gray-100;
+}answer-accepted span {
+    @apply text-gray-100;
+}answer-accepted span {
     @apply text-gray-100;
 }
