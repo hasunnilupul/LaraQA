@@ -1,4 +1,4 @@
-@props(['type'])
+@props(['type','title','message'])
 
 @php
 $typeClass = '';
@@ -10,7 +10,7 @@ switch ($type) {
     case 'warning':
         $typeClass = 'text-yellow-500';
         break;
-    case 'danger':
+    case 'error':
         $typeClass = 'text-red-500';
         break;
     case 'success':
@@ -33,7 +33,7 @@ switch ($type) {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 @elseif ($type=='warning')
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                @elseif ($type=='danger')
+                @elseif ($type=='error')
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01" />
                 @elseif ($type=='success')
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -41,8 +41,12 @@ switch ($type) {
             </svg>
             
             <div class="flex-1 space-y-1 py-2">
-                <p class="text-base leading-6 font-semibold antialiased {{ $typeClass }}">{{ $title }}</p>
-                <p class="text-sm leading-5 text-gray-400 antialiased">{{ $message }}</p>
+                @if($title)
+                    <p class="text-base leading-6 font-semibold antialiased {{ $typeClass }}">{{ $title }}</p>
+                @endif
+                @if($message)
+                    <p class="text-sm leading-5 text-gray-400 antialiased">{{ $message }}</p>
+                @endif
             </div>
             <svg class="flex-shrink-0 h-5 w-5 text-gray-400 cursor-pointer" x-on:click="isShow = false"
                 stroke="currentColor" viewBox="0 0 20 20">

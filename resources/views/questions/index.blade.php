@@ -28,10 +28,15 @@
                             </div>
                         </div>
                         <div class="flex-1 min-w-0 sm:border-l-2 sm:border-gray-200 sm:pl-2">
-                            <h2 class="text-md font-bold leading-7 sm:text-lg sm:truncate">
-                                <a href="{{ $question->url }}"
-                                    class="text-gray-600 hover:text-gray-800 hover:underline">{{ $question->title }}</a>
-                            </h2>
+                            <div class="flex items-center">
+                                <h2 class="text-md font-bold leading-7 sm:text-lg sm:truncate">
+                                    <a href="{{ $question->url }}"
+                                        class="text-gray-600 hover:text-gray-800 hover:underline">{{ $question->title }}</a>
+                                </h2>
+                                <div class="ml-auto">
+                                    <a href="{{ route('questions.edit', $question->id) }}" class="px-2 py-1 border border-blue-500 text-gray-600 rounded text-sm font-semibold hover:bg-blue-500 hover:text-gray-100">Edit</a>
+                                </div>
+                            </div>
                             <div class="flex items-baseline mt-1 sm:mt-0 text-sm text-gray-500">
                                 Asked by
                                 <a href="{{ $question->user->url }}"
@@ -52,4 +57,6 @@
             </div>
         </div>
     </div>
+
+    @include('components._notifications')
 </x-app-layout>

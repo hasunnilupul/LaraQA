@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Ask Question') }}
+            {{ __('Edit Question') }}
         </h2>
         <div class="ml-auto">
             <a href="{{ route('questions.index') }}"
@@ -24,8 +24,9 @@
                             </div>
                         </div>
                         <div class="mt-5 md:mt-0 md:col-span-2">
-                            <form action="{{ route('questions.store') }}" method="post">
-                                @include('questions._form',['buttonText'=>'Publish Question'])
+                            <form action="{{ route('questions.update', $question->id) }}" method="post">
+                                @method('PUT')
+                                @include('questions._form',['buttonText'=>'Update Question'])
                             </form>
                         </div>
                     </div>
