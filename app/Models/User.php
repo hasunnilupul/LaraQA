@@ -56,4 +56,14 @@ class User extends Authenticatable
         //return route('questions.show',$this->id);
         return '#';
     }
+
+    /**
+     * Get all of the answers for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function answers(): HasMany
+    {
+        return $this->hasMany(Answer::class);
+    }
 }

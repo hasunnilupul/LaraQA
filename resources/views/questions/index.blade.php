@@ -24,9 +24,9 @@
                             </div>
                             <div
                                 class="flex flex-col w-full items-center justify-center px-1 mb-2 {{ $question->status }}">
-                                <strong class="text-md font-bold text-gray-600">{{ $question->answers }}</strong>
+                                <strong class="text-md font-bold text-gray-600">{{ $question->answers_count }}</strong>
                                 <span
-                                    class="text-xs font-light text-gray-500">{{ Str::plural('answer', $question->answers) }}</span>
+                                    class="text-xs font-light text-gray-500">{{ Str::plural('answer', $question->answers_count) }}</span>
                             </div>
                             <div class="flex w-full items-center justify-center px-1">
                                 <strong
