@@ -53,8 +53,7 @@ class User extends Authenticatable
 
     public function getUrlAttribute()
     {
-        //return route('questions.show',$this->id);
-        return '#';
+        return route('questions.show',$this->id);
     }
 
     /**
@@ -65,5 +64,14 @@ class User extends Authenticatable
     public function answers(): HasMany
     {
         return $this->hasMany(Answer::class);
+    }
+
+    public function getAvatarAttribute()
+    {
+        $email = $this->email;
+        $size = 32;
+
+        return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?&s=" . $size;
+
     }
 }
