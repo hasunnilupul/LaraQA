@@ -17,12 +17,44 @@
 .answer-accepted strong,
 .answer-accepted span {
     @apply text-gray-100;
-}answer-accepted span {
+}
+
+.vote {
+    @apply text-gray-400;
+}
+
+.vote-active {
+    @apply text-gray-600;
+}
+
+answer-accepted span {
     @apply text-gray-100;
-}answer-accepted span {
+}
+
+answer-accepted span {
     @apply text-gray-100;
-}answer-accepted span {
-    @apply text-gray-100;
-}answer-accepted span {
-    @apply text-gray-100;
+}
+
+.vote {
+    @apply text-gray-400;
+}
+
+.vote-active {
+    @apply text-gray-500;
+}
+
+.favourite {
+    @apply text-gray-400;
+}
+
+.favourite-active {
+    @apply text-yellow-400;
+}
+
+.not-accepted {
+    @apply text-gray-500;
+}
+
+.accepted {
+    @apply text-green-500;
 }

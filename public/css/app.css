@@ -32136,9 +32136,14 @@ select {
   color: rgba(243, 244, 246, var(--tw-text-opacity));
 }
 
-answer-accepted span {
+.vote {
   --tw-text-opacity: 1;
-  color: rgba(243, 244, 246, var(--tw-text-opacity));
+  color: rgba(156, 163, 175, var(--tw-text-opacity));
+}
+
+.vote-active {
+  --tw-text-opacity: 1;
+  color: rgba(75, 85, 99, var(--tw-text-opacity));
 }
 
 answer-accepted span {
@@ -32151,9 +32156,34 @@ answer-accepted span {
   color: rgba(243, 244, 246, var(--tw-text-opacity));
 }
 
-answer-accepted span {
+.vote {
   --tw-text-opacity: 1;
-  color: rgba(243, 244, 246, var(--tw-text-opacity));
+  color: rgba(156, 163, 175, var(--tw-text-opacity));
+}
+
+.vote-active {
+  --tw-text-opacity: 1;
+  color: rgba(107, 114, 128, var(--tw-text-opacity));
+}
+
+.favourite {
+  --tw-text-opacity: 1;
+  color: rgba(107, 114, 128, var(--tw-text-opacity));
+}
+
+.favourite-active {
+  --tw-text-opacity: 1;
+  color: rgba(251, 191, 36, var(--tw-text-opacity));
+}
+
+.not-accepted{
+  --tw-text-opacity: 1;
+  color: rgba(107, 114, 128, var(--tw-text-opacity));
+}
+
+.accepted{
+  --tw-text-opacity: 1;
+  color: rgba(16, 185, 129, var(--tw-text-opacity));
 }
 
 @media (min-width: 640px) {
