@@ -44,11 +44,11 @@ answer-accepted span {
 }
 
 .favourite {
-    @apply text-gray-400;
+    @apply text-gray-500;
 }
 
 .favourite-active {
-    @apply text-yellow-400;
+    @apply text-yellow-300;
 }
 
 .not-accepted {

@@ -79,6 +79,4 @@
             </div>
         </div>
     </div>
-
-    @include('components._notifications')
 </x-app-layout>

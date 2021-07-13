@@ -32173,15 +32173,15 @@ answer-accepted span {
 
 .favourite-active {
   --tw-text-opacity: 1;
-  color: rgba(251, 191, 36, var(--tw-text-opacity));
+  color: rgba(252, 211, 77, var(--tw-text-opacity));
 }
 
-.not-accepted{
+.not-accepted {
   --tw-text-opacity: 1;
   color: rgba(107, 114, 128, var(--tw-text-opacity));
 }
 
-.accepted{
+.accepted {
   --tw-text-opacity: 1;
   color: rgba(16, 185, 129, var(--tw-text-opacity));
 }
