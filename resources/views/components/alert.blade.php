@@ -22,11 +22,11 @@ switch ($type) {
 <div x-data="{isShow: true}">
     <div x-show="isShow" class="w-full mb-2" 
         x-transition:enter="transition transform ease-out duration-300"
-        x-transition:enter-start="opacity-0 translate-y-1" 
-        x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:enter-start="opacity-0 translate-y-0" 
+        x-transition:enter-end="opacity-100 translate-y-1"
         x-transition:leave="transition transform ease-in duration-300"
-        x-transition:leave-start="opacity-100 translate-y-0" 
-        x-transition:leave-end="opacity-0 translate-y-1">
+        x-transition:leave-start="opacity-100 translate-y-1" 
+        x-transition:leave-end="opacity-0 translate-y-0">
         <div class="flex items-center shadow-lg rounded-md space-x-2 bg-white border-gray-100 border px-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 h-6 w-6 bg-white {{ $typeClass }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 @if ($type=='info')

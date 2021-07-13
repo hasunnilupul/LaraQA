@@ -28,17 +28,38 @@
             </div>
             <div class="flex flex-col justify-center items-start w-full pl-3">
                 {!! $answer->body_html !!}
-                <div class="flex flex-col w-full justify-center items-end mt-1">
-                    <div class="text-sm font-medium text-right text-gray-400">Answered
-                        {{ $question->created_date }}</div>
-                    <div class="flex justify-end mt-2">
-                        <a href="{{ $answer->user->url }}" class="pr-2 select-none">
-                            <img src="{{ $answer->user->avatar }}" alt="user-img"
-                                class="rounded-full w-8 h-8">
-                        </a>
-                        <a href="{{ $answer->user->url }}" class="text-sm font-bold text-blue-600 mt-2">
-                            {{ $answer->user->name }}
-                        </a>
+                <div class="flex flex-auto w-full justify-between items-center mt-1">
+                    <div class="flex flex-auto">
+                        @can('update', $answer)
+                            <a href="{{ route('questions.answers.edit', [$question->id, $answer->id]) }}"
+                                class="px-2 py-1 mr-2 border border-blue-500 text-gray-600 rounded text-sm font-semibold hover:bg-blue-500 hover:text-gray-100">
+                                Edit
+                            </a>
+                        @endcan
+                        @can('delete', $answer)
+                            <form action="{{ route('questions.answers.destroy', [$question->id, $answer->id]) }}" method="post">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit"
+                                    class="px-2 py-1 border border-red-500 text-gray-600 rounded text-sm font-semibold hover:bg-red-500 hover:text-gray-100"
+                                    onclick="return confirm('Are you sure?')">
+                                    Delete
+                                </button>
+                            </form>
+                        @endcan
+                    </div>
+                    <div class="flex flex-col justify-end">
+                        <div class="text-sm font-medium text-gray-400">Answered
+                            {{ $question->created_date }}</div>
+                        <div class="flex justify-end mt-2">
+                            <a href="{{ $answer->user->url }}" class="pr-2 select-none">
+                                <img src="{{ $answer->user->avatar }}" alt="user-img"
+                                    class="rounded-full w-8 h-8">
+                            </a>
+                            <a href="{{ $answer->user->url }}" class="text-sm font-bold text-blue-600 mt-2">
+                                {{ $answer->user->name }}
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

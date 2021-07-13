@@ -4,9 +4,9 @@
         @csrf
         <div class="px-4 py-2 bg-white">
             <div class="mt-1">
-                <textarea id="body" name="body" rows="7" maxlength="500"
+                <textarea id="body" name="body" rows="7" maxlength="1000"
                     class="mt-1 {{ $errors->has('body') ? 'focus:ring-red-400 focus:border-red-500 border-red-300' : 'focus:ring-indigo-500 focus:border-indigo-500 border-gray-300' }}  block w-full shadow-sm sm:text-sm text-gray-600 rounded-md"
-                    placeholder="You are going to post an answer for this question.">{{ old('body', $answer->body) }}</textarea>
+                    placeholder="You are going to post an answer for this question."></textarea>
             </div>
 
             @if ($errors->has('body'))
