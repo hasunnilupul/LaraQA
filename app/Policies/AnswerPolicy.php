@@ -11,6 +11,18 @@ class AnswerPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine whether the user can accept the answer.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Answer  $Answer
+     * @return mixed
+     */
+    public function accept(User $user, Answer $answer)
+    {
+        return $user->id == $answer->question->user_id;
+    }
+
+    /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
