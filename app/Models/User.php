@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -53,7 +54,7 @@ class User extends Authenticatable
 
     public function getUrlAttribute()
     {
-        return route('questions.show',$this->id);
+        return route('questions.show', $this->id);
     }
 
     /**
@@ -71,7 +72,16 @@ class User extends Authenticatable
         $email = $this->email;
         $size = 32;
 
-        return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?&s=" . $size;
+        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?&s=" . $size;
+    }
 
+    /**
+     * The favourite questions of the the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function favourites(): BelongsToMany
+    {
+        return $this->belongsToMany(Question::class, 'favourites')->withTimestamps();
     }
 }

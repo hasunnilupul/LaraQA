@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
@@ -72,5 +73,30 @@ class Question extends Model
     {
         $this->best_answer_id=$answer->id;
         $this->save();
+    }
+
+    /**
+     * The users that favourited the Question
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function favourites(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'favourites')->withTimestamps();
+    }
+
+    public function isFavourited()
+    {
+        return $this->favourites()->where('user_id', auth()->id())->count()>0;
+    }
+
+    public function getIsFavouritedAttribute()
+    {
+        return $this->isFavourited();
+    }
+
+    public function getFavouritesCountAttribute()
+    {
+        return $this->favourites->count();
     }
 }

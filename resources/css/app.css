@@ -43,6 +43,10 @@ answer-accepted span {
     @apply text-gray-500;
 }
 
+.off {
+    @apply text-gray-400;
+}
+
 .favourite {
     @apply text-gray-500;
 }
