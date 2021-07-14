@@ -20,9 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 require __DIR__.'/auth.php';
 
-Route::get('/', function () {
-    return redirect('questions');
-})->name('home');
+Route::get('/', [QuestionController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

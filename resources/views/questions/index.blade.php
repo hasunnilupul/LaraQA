@@ -13,7 +13,7 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-4 lg:px-5">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-sm">
-                @foreach ($questions as $question)
+                @forelse ($questions as $question)
                     <div
                         class="sm:flex sm:items-center sm:justify-between p-4 border-b border-gray-200 hover:bg-gray-50">
                         <div class="flex flex-col flex-grow-0 sm:w-18 items-center justify-center sm:pr-4">
@@ -71,7 +71,11 @@
                             </p>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="sm:flex sm:items-center sm:justify-start p-4 border-b bg-yellow-200 text-yellow-800 border-yellow-200">
+                        <strong class="pr-1">Sorry</strong>there are no questions available.    
+                    </div>   
+                @endforelse
             </div>
 
             <div class="mt-6 mx-4">
