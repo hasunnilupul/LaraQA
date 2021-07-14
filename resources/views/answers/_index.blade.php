@@ -83,16 +83,10 @@
                         @endcan
                     </div>
                     <div class="flex flex-col justify-end">
-                        <div class="text-sm font-medium text-gray-400">Answered
-                            {{ $answer->created_date }}</div>
-                        <div class="flex justify-end mt-2">
-                            <a href="{{ $answer->user->url }}" class="pr-2 select-none">
-                                <img src="{{ $answer->user->avatar }}" alt="user-img" class="rounded-full w-8 h-8">
-                            </a>
-                            <a href="{{ $answer->user->url }}" class="text-sm font-bold text-blue-600 mt-2">
-                                {{ $answer->user->name }}
-                            </a>
-                        </div>
+                        @include('shared._author', [
+                            'model' => $answer,
+                            'label' => 'answered'
+                        ])
                     </div>
                 </div>
             </div>

@@ -66,17 +66,10 @@
                     <div class="flex flex-grow flex-col items-start justify-center pl-3">
                         {!! $question->body_html !!}
                         <div class="flex flex-col justify-center items-end w-full mt-2">
-                            <div class="text-sm font-medium text-gray-400">Answered {{ $question->created_date }}
-                            </div>
-                            <div class="flex mt-2">
-                                <a href="{{ $question->user->url }}" class="pr-2 select-none">
-                                    <img src="{{ $question->user->avatar }}" alt="user-img"
-                                        class="rounded-full w-8 h-8">
-                                </a>
-                                <a href="{{ $question->user->url }}" class="text-sm font-bold text-blue-600 mt-2">
-                                    {{ $question->user->name }}
-                                </a>
-                            </div>
+                            @include('shared._author',[
+                                'model' => $question,
+                                'label' => 'asked'
+                            ])
                         </div>
                     </div>
                 </div>
