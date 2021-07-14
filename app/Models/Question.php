@@ -12,7 +12,8 @@ use Illuminate\Support\Str;
 class Question extends Model
 {
     use HasFactory;
-
+    use VotableTrait;
+    
     protected $fillable = [
         'title',
         'body'
@@ -36,7 +37,7 @@ class Question extends Model
 
     public function getUrlAttribute()
     {
-        return route('questions.show',$this->slug);
+        return route('questions.show', $this->slug);
     }
 
     public function getCreatedDateAttribute()
@@ -44,9 +45,10 @@ class Question extends Model
         return $this->created_at->diffForHumans();
     }
 
-    public function getStatusAttribute(){
-        if($this->answers_count > 0){
-            if($this->best_answer_id){
+    public function getStatusAttribute()
+    {
+        if ($this->answers_count > 0) {
+            if ($this->best_answer_id) {
                 return "answer-accepted";
             }
             return "answered";
@@ -71,7 +73,7 @@ class Question extends Model
 
     public function acceptBestAnswer(Answer $answer)
     {
-        $this->best_answer_id=$answer->id;
+        $this->best_answer_id = $answer->id;
         $this->save();
     }
 
@@ -87,7 +89,7 @@ class Question extends Model
 
     public function isFavourited()
     {
-        return $this->favourites()->where('user_id', auth()->id())->count()>0;
+        return $this->favourites()->where('user_id', auth()->id())->count() > 0;
     }
 
     public function getIsFavouritedAttribute()
@@ -98,20 +100,5 @@ class Question extends Model
     public function getFavouritesCountAttribute()
     {
         return $this->favourites->count();
-    }
-
-    public function votes()
-    {
-        return $this->morphToMany(User::class, 'votable');
-    }
-
-    public function upVotes()
-    {
-        return $this->votes()->wherePivot('vote', 1);
-    }
-
-    public function downVotes()
-    {
-        return $this->votes()->wherePivot('vote', -1);
     }
 }
