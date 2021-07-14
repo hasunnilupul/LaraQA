@@ -35,16 +35,16 @@ answer-accepted span {
     @apply text-gray-100;
 }
 
+.off {
+    @apply text-gray-300;
+}
+
 .vote {
     @apply text-gray-400;
 }
 
 .vote-active {
     @apply text-gray-500;
-}
-
-.off {
-    @apply text-gray-400;
 }
 
 .favourite {

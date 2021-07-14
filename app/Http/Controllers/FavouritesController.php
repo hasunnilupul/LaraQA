@@ -9,7 +9,7 @@ class FavouritesController extends Controller
 {
     public function __construct()
     {
-        return $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**

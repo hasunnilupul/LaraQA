@@ -15,21 +15,36 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-sm">
                 <div class="flex justify-start items-start p-4 border border-gray-200 text-gray-600">
                     <div class="flex flex-col justify-center items-center py-1">
-                        <a title="This question is usefull" href="#" class="block">
+                        <a title="This question is usefull" href="#" class="block vote {{ Auth::guest() ? 'off':'' }}"
+                        onclick="event.preventDefault();document.getElementById('up-vote-question-{{ $question->id }}').submit();">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                class="bi bi-caret-up-fill w-10 h-10 vote" viewBox="0 0 16 16">
+                                class="bi bi-caret-up-fill w-10 h-10" viewBox="0 0 16 16">
                                 <path
                                     d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
                             </svg>
                         </a>
-                        <span class="block text-xl font-bold py-2">1293</span>
-                        <a title="This question is not usefull" href="#" class="block">
+                        <form action="/questions/{{ $question->id }}/vote" method="post"
+                            id="up-vote-question-{{ $question->id }}" class="hidden">
+                            @csrf
+                            <input type="hidden" name="vote" value="1"/>
+                        </form>
+                        
+                        <span class="block text-xl font-bold py-2">{{ $question->votes_count }}</span>
+                        
+                        <a title="This question is not usefull" href="#" class="block vote-active {{ Auth::guest() ? 'off':'' }}"
+                        onclick="event.preventDefault();document.getElementById('down-vote-question-{{ $question->id }}').submit();">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                class="bi bi-caret-down-fill w-10 h-10 vote-active" viewBox="0 0 16 16">
+                                class="bi bi-caret-down-fill w-10 h-10" viewBox="0 0 16 16">
                                 <path
                                     d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
                             </svg>
                         </a>
+                        <form action="/questions/{{ $question->id }}/vote" method="post"
+                            id="down-vote-question-{{ $question->id }}" class="hidden">
+                            @csrf
+                            <input type="hidden" name="vote" value="-1"/>
+                        </form>
+                        
                         <a title="Click to mark as favourite question" href="#" 
                             class="block mt-2 text-center {{ Auth::guest() ? 'off':($question->is_favourited ? 'favourite-active' : 'favourite') }}"
                             onclick="event.preventDefault();document.getElementById('favourite-question-{{ $question->id }}').submit();">

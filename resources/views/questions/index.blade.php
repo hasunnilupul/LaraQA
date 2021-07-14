@@ -18,9 +18,9 @@
                         class="sm:flex sm:items-center sm:justify-between p-4 border-b border-gray-200 hover:bg-gray-50">
                         <div class="flex flex-col flex-grow-0 sm:w-18 items-center justify-center sm:pr-4">
                             <div class="flex flex-col w-full items-center justify-center px-1 mb-2">
-                                <strong class="text-md font-bold text-gray-600">{{ $question->votes }}</strong>
+                                <strong class="text-md font-bold text-gray-600">{{ $question->votes_count }}</strong>
                                 <span
-                                    class="text-xs font-light text-gray-500">{{ Str::plural('vote', $question->votes) }}</span>
+                                    class="text-xs font-light text-gray-500">{{ Str::plural('vote', $question->votes_count) }}</span>
                             </div>
                             <div
                                 class="flex flex-col w-full items-center justify-center px-1 mb-2 {{ $question->status }}">
