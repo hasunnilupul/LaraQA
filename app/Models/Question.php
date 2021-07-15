@@ -30,7 +30,9 @@ class Question extends Model
      * @var array
      */
     protected $appends = [
-        'created_date'
+        'created_date',
+        'is_favourited',
+        'favourites_count'
     ];
 
     /**

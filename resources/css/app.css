@@ -19,22 +19,6 @@
     @apply text-gray-100;
 }
 
-.vote {
-    @apply text-gray-400;
-}
-
-.vote-active {
-    @apply text-gray-600;
-}
-
-answer-accepted span {
-    @apply text-gray-100;
-}
-
-answer-accepted span {
-    @apply text-gray-100;
-}
-
 .off {
     @apply text-gray-300;
 }

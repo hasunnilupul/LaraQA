@@ -45,23 +45,7 @@
                             <input type="hidden" name="vote" value="-1"/>
                         </form>
                         
-                        <a title="Click to mark as favourite question" href="#" 
-                            class="block mt-2 text-center {{ Auth::guest() ? 'off':($question->is_favourited ? 'favourite-active' : 'favourite') }}"
-                            onclick="event.preventDefault();document.getElementById('favourite-question-{{ $question->id }}').submit();">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                class="bi bi-star-fill w-7 h-7" viewBox="0 0 16 16">
-                                <path
-                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                            </svg>
-                            <span class="text-xs font-medium lining-nums font-serif">{{ $question->favourites_count }}</span>
-                        </a>
-                        <form action="/questions/{{ $question->id }}/favourites" method="post"
-                            id="favourite-question-{{ $question->id }}" class="hidden">
-                            @csrf
-                            @if ($question->is_favourited)
-                                @method('DELETE')
-                            @endif
-                        </form>
+                        <favourite :question="{{ $question }}"></favourite>
                     </div>
                     <div class="flex flex-grow flex-col items-start justify-center pl-3">
                         {!! $question->body_html !!}
