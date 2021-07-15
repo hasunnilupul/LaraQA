@@ -24,6 +24,16 @@ class User extends Authenticatable
     ];
 
     /**
+     * The attributes that appends to JSON Object
+     *
+     * @var array
+     */
+    protected $appends = [
+        'url',
+        'avatar'
+    ];
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array

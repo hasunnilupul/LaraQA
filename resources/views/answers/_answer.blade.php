@@ -75,10 +75,7 @@
                 @endcan
             </div>
             <div class="flex flex-col justify-end">
-                @include('shared._author', [
-                'model' => $answer,
-                'label' => 'answered'
-                ])
+                <user-info :model="{{ $answer }}" :label="'Answered'"></user-info>
             </div>
         </div>
     </div>

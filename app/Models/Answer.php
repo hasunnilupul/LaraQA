@@ -12,9 +12,23 @@ class Answer extends Model
     use HasFactory;
     use VotableTrait;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'body',
         'user_id',
+    ];
+
+    /**
+     * The attributes that appends to JSON Object
+     *
+     * @var array
+     */
+    protected $appends = [
+        'created_date'
     ];
 
     /**

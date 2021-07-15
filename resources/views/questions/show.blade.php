@@ -66,10 +66,7 @@
                     <div class="flex flex-grow flex-col items-start justify-center pl-3">
                         {!! $question->body_html !!}
                         <div class="flex flex-col justify-center items-end w-full mt-2">
-                            @include('shared._author',[
-                                'model' => $question,
-                                'label' => 'asked'
-                            ])
+                            <user-info :model="{{ $question }}" :label="'Asked'"></user-info>
                         </div>
                     </div>
                 </div>
