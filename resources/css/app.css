@@ -62,3 +62,7 @@ answer-accepted span {
 .accepted {
     @apply text-green-500;
 }
+
+[v-cloak] {
+    @apply hidden;
+}

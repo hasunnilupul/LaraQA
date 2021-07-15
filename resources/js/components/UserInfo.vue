@@ -14,6 +14,7 @@
 
 <script>
 export default {
+    name: 'user-info',
     props:['model', 'label'],
     computed: {
         postDate(){

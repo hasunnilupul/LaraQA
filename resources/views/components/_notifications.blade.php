@@ -1,5 +1,5 @@
 <!-- Notifications -->
-<x-alert-container>
+<x-notificaton-container>
     @if (session('info'))
         <x-alert type="info" title="{{ session('info') }}" message=""></x-alert>
     @endif

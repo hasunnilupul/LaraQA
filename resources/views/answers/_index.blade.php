@@ -1,4 +1,4 @@
-<div class="bg-white overflow-hidden shadow-sm sm:rounded-sm p-4 mt-6">
+<div class="bg-white overflow-hidden shadow-sm sm:rounded-sm p-4 mt-6" v-cloak>
     @if ($answersCount > 0)
         <h2 class="text-lg font-bold text-gray-600">
             {{ $answersCount . ' ' . Str::plural('Answer', $answersCount) }}</h2>

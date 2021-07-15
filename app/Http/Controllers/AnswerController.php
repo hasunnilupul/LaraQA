@@ -20,7 +20,8 @@ class AnswerController extends Controller
     public function store(Question $question, Request $request)
     {
         $question->answers()->create(
-            $request->validate(['body' => 'required']) + ['user_id' => Auth::id()]);
+            $request->validate(['body' => 'required']) + ['user_id' => Auth::id()]
+        );
         return back()->with('success', 'Your answer has been submitted successfully.');
     }
 
@@ -33,7 +34,7 @@ class AnswerController extends Controller
     public function edit(Question $question, Answer $answer)
     {
         $this->authorize('update', $answer);
-        return view('answers.edit', compact(['question','answer']));
+        return view('answers.edit', compact(['question', 'answer']));
     }
 
     /**
@@ -47,7 +48,13 @@ class AnswerController extends Controller
     {
         $this->authorize('update', $answer);
         $answer->update($request->validate(['body' => 'required']));
-        return redirect()->route('questions.show', $question->slug)->with('success','Your answer has been updated.');
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Your answer has been updated.',
+                'body_html' => $answer->body_html,
+            ]);
+        }
+        return redirect()->route('questions.show', $question->slug)->with('success', 'Your answer has been updated.');
     }
 
     /**
