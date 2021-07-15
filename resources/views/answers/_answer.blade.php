@@ -31,27 +31,7 @@
                 <input type="hidden" name="vote" value="-1" />
             </form>
 
-            @can('accept', $answer)
-                <a title="Mark this answer as best answer" href="#" class="block mt-2 text-center {{ $answer->status }}"
-                    onclick="event.preventDefault();document.getElementById('accept-answer-{{ $answer->id }}').submit();">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check-lg h-5 w-5"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z" />
-                    </svg>
-                </a>
-            @else
-                @if ($answer->is_best)
-                    <a title="Marked as the best answer by answer owner" href="#"
-                        class="block mt-2 text-center {{ $answer->status }}" onclick="event.preventDefault();">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check-lg h-5 w-5"
-                            viewBox="0 0 16 16">
-                            <path
-                                d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z" />
-                        </svg>
-                    </a>
-                @endif
-            @endcan
+            <accept-answer :answer="{{ $answer }}"></accept-answer>
         </div>
         <div class="flex flex-grow flex-col justify-center items-start ml-3" v-if="editing">
             <form @submit.prevent="update" class="w-full">
