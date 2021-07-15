@@ -1,7 +1,7 @@
 <answer inline-template :answer="{{ $answer }}">
     <div class="flex justify-start items-start mx-2 py-2 text-gray-600 border-b last:border-0 border-gray-300">
         <div class="flex flex-col justify-center items-center py-1">
-            <a title="This answer is usefull" href="#" class="block vote-active {{ Auth::guest() ? 'off' : '' }}"
+            <a title="This answer is usefull" href="#" class="block {{ Auth::guest() ? 'off':'vote' }}"
                 onclick="event.preventDefault();document.getElementById('up-vote-answer-{{ $answer->id }}').submit();">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-up-fill w-8 h-8"
                     viewBox="0 0 16 16">
@@ -17,7 +17,7 @@
 
             <span class="block text-lg font-bold py-2">{{ $answer->votes_count }}</span>
 
-            <a title="This answer is not usefull" href="#" class="block vote {{ Auth::guest() ? 'off' : '' }}"
+            <a title="This answer is not usefull" href="#" class="block {{ Auth::guest() ? 'off':'vote' }}"
                 onclick="event.preventDefault();document.getElementById('down-vote-answer-{{ $answer->id }}').submit();">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-down-fill w-8 h-8"
                     viewBox="0 0 16 16">
@@ -62,7 +62,7 @@
                 </div>
                 <div class="py-3 text-left">
                     <button type="submit" :disabled="isInvalid"
-                        class="inline-flex justify-center py-1 px-2 mr-2 shadow-sm text-sm font-semibold rounded text-white bg-indigo-600 focus:outline-none disabled:opacity-50">Update</button>
+                        class="inline-flex justify-center py-1 px-2 mr-2 border border-indigo-600 shadow-sm text-sm font-semibold rounded text-white bg-indigo-600 focus:outline-none disabled:opacity-50">Update</button>
                     <button @click="cancel" type="button"
                         class="inline-flex justify-center py-1 px-2 border border-gray-600 shadow-sm text-sm font-semibold rounded text-gray-600 hover:text-white focus:text-white hover:bg-gray-600 focus:bg-gray-600 focus:outline-none">Cancel</button>
 
@@ -80,16 +80,10 @@
                         </button>
                     @endcan
                     @can('delete', $answer)
-                        <form action="{{ route('questions.answers.destroy', [$answer->id, $answer->id]) }}"
-                            method="post">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit"
-                                class="px-2 py-1 border border-red-500 shadow-sm text-gray-600 rounded text-sm font-semibold hover:bg-red-500 focus:bg-red-500 hover:text-gray-100 focus:text-gray-100 cursor-pointer"
-                                onclick="return confirm('Are you sure?')">
-                                Delete
-                            </button>
-                        </form>
+                        <button @click="destroy" type="button"
+                            class="px-2 py-1 border border-red-500 shadow-sm text-gray-600 rounded text-sm font-semibold hover:bg-red-500 focus:bg-red-500 hover:text-gray-100 focus:text-gray-100 cursor-pointer">
+                            Delete
+                        </button>
                     @endcan
                 </div>
                 <div class="flex flex-col justify-end">

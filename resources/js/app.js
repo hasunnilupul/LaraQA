@@ -2,6 +2,9 @@ require('./bootstrap');
 require('alpinejs');
 
 import Vue from 'vue'
+import VueIziToast from 'vue-izitoast';
+
+import 'izitoast/dist/css/iziToast.min.css';
 
 Vue.config.productionTip = false;
 
@@ -11,6 +14,9 @@ import Answer from './components/Answer.vue'
 
 Vue.component('user-info', UserInfo);
 Vue.component('answer', Answer);
+
+//Plugins
+Vue.use(VueIziToast);
 
 const app = new Vue({
     el: '#app'

@@ -15,7 +15,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-sm">
                 <div class="flex justify-start items-start p-4 border border-gray-200 text-gray-600">
                     <div class="flex flex-col justify-center items-center py-1">
-                        <a title="This question is usefull" href="#" class="block vote {{ Auth::guest() ? 'off':'' }}"
+                        <a title="This question is usefull" href="#" class="block {{ Auth::guest() ? 'off':'vote' }}"
                         onclick="event.preventDefault();document.getElementById('up-vote-question-{{ $question->id }}').submit();">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                 class="bi bi-caret-up-fill w-10 h-10" viewBox="0 0 16 16">
@@ -31,7 +31,7 @@
                         
                         <span class="block text-xl font-bold py-2">{{ $question->votes_count }}</span>
                         
-                        <a title="This question is not usefull" href="#" class="block vote-active {{ Auth::guest() ? 'off':'' }}"
+                        <a title="This question is not usefull" href="#" class="block {{ Auth::guest() ? 'off':'vote' }}"
                         onclick="event.preventDefault();document.getElementById('down-vote-question-{{ $question->id }}').submit();">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                 class="bi bi-caret-down-fill w-10 h-10" viewBox="0 0 16 16">
