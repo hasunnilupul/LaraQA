@@ -1,39 +1,8 @@
 <answer inline-template :answer="{{ $answer }}">
     <div class="flex justify-start items-start mx-2 py-2 text-gray-600 border-b last:border-0 border-gray-300">
-        <div class="flex flex-col justify-center items-center py-1">
-            <a title="This answer is usefull" href="#" class="block {{ Auth::guest() ? 'off':'vote' }}"
-                onclick="event.preventDefault();document.getElementById('up-vote-answer-{{ $answer->id }}').submit();">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-up-fill w-8 h-8"
-                    viewBox="0 0 16 16">
-                    <path
-                        d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
-                </svg>
-            </a>
-            <form action="/answers/{{ $answer->id }}/vote" method="post" id="up-vote-answer-{{ $answer->id }}"
-                class="hidden">
-                @csrf
-                <input type="hidden" name="vote" value="1" />
-            </form>
+        <vote name="answer" :model="{{$answer}}" iconsize="w-8 h-8"></vote>
 
-            <span class="block text-lg font-bold py-2">{{ $answer->votes_count }}</span>
-
-            <a title="This answer is not usefull" href="#" class="block {{ Auth::guest() ? 'off':'vote' }}"
-                onclick="event.preventDefault();document.getElementById('down-vote-answer-{{ $answer->id }}').submit();">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-down-fill w-8 h-8"
-                    viewBox="0 0 16 16">
-                    <path
-                        d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                </svg>
-            </a>
-            <form action="/answers/{{ $answer->id }}/vote" method="post" id="down-vote-answer-{{ $answer->id }}"
-                class="hidden">
-                @csrf
-                <input type="hidden" name="vote" value="-1" />
-            </form>
-
-            <accept-answer :answer="{{ $answer }}"></accept-answer>
-        </div>
-        <div class="flex flex-grow flex-col justify-center items-start ml-3" v-if="editing">
+        <div v-if="editing" class="flex flex-grow flex-col justify-center items-start ml-3">
             <form @submit.prevent="update" class="w-full">
                 <div class="mt-1">
                     <textarea id="body" v-model="body" rows="7" maxlength="1000" required
@@ -49,7 +18,7 @@
                 </div>
             </form>
         </div>
-        <div class="flex flex-grow flex-col justify-center items-start ml-3" v-else>
+        <div v-else class="flex flex-grow flex-col justify-center items-start ml-3">
             <div v-html="bodyHtml"></div>
             <div class="flex flex-auto w-full justify-between items-center mt-1">
                 <div class="flex flex-auto">

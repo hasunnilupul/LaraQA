@@ -12,13 +12,11 @@ Vue.config.productionTip = false;
 //Globally registered components
 import UserInfo from './components/UserInfo.vue';
 import Answer from './components/Answer.vue';
-import Favourite from './components/Favourite.vue';
-import AcceptAnswer from './components/AcceptAnswer.vue';
+import Vote from './components/Vote.vue';
 
 Vue.component('user-info', UserInfo);
 Vue.component('answer', Answer);
-Vue.component('favourite', Favourite);
-Vue.component('accept-answer', AcceptAnswer);
+Vue.component('vote', Vote);
 
 //Plugins
 Vue.use(VueIziToast);
