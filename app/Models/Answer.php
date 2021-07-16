@@ -30,9 +30,23 @@ class Answer extends Model
     protected $appends = [
         'created_date',
         'body_html',
-        'is_best'
+        'is_best',
+        'user'
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($answer) {
+            $answer->question->increment('answers_count');
+        });
+
+        static::deleted(function ($answer) {
+            $answer->question->decrement('answers_count');
+        });
+    }
+    
     /**
      * Get the question that owns the Answer
      *
@@ -53,22 +67,13 @@ class Answer extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getUserAttribute(){
+        return $this->user();
+    }
+
     public function getBodyHtmlAttribute()
     {
         return Str::markdown($this->body);
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::created(function ($answer) {
-            $answer->question->increment('answers_count');
-        });
-
-        static::deleted(function ($answer) {
-            $answer->question->decrement('answers_count');
-        });
     }
 
     public function getCreatedDateAttribute()

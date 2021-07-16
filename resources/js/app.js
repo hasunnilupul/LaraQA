@@ -13,10 +13,12 @@ Vue.config.productionTip = false;
 import UserInfo from './components/UserInfo.vue';
 import Vote from './components/Vote.vue';
 import Answers from './components/Answers.vue';
+import NewAnswer from './components/NewAnswer.vue';
 
 Vue.component('user-info', UserInfo);
 Vue.component('vote', Vote);
 Vue.component('answers', Answers);
+Vue.component('new-answer', NewAnswer);
 
 //Plugins
 Vue.use(VueIziToast);

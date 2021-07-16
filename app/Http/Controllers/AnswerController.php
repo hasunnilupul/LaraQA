@@ -19,9 +19,17 @@ class AnswerController extends Controller
      */
     public function store(Question $question, Request $request)
     {
-        $question->answers()->create(
+        $answer = $question->answers()->create(
             $request->validate(['body' => 'required']) + ['user_id' => Auth::id()]
         );
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Your answer has been submitted successfully.',
+                'answer' => Answer::with('user')->find($answer->id)
+            ]);
+        }
+
         return back()->with('success', 'Your answer has been submitted successfully.');
     }
 
@@ -48,6 +56,7 @@ class AnswerController extends Controller
     {
         $this->authorize('update', $answer);
         $answer->update($request->validate(['body' => 'required']));
+
         if ($request->expectsJson()) {
             return response()->json([
                 'message' => 'Your answer has been updated.',
