@@ -18,17 +18,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-require __DIR__.'/auth.php';
+
+require __DIR__ . '/auth.php';
 
 Route::get('/', [QuestionController::class, 'index'])->name('home');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 Route::resource('questions', QuestionController::class)->except('show');
 Route::get('/questions/{slug}', [QuestionController::class, 'show'])->name('questions.show');
-Route::resource('questions.answers', AnswerController::class)->except(['create','show']);
+Route::resource('questions.answers', AnswerController::class)->except(['create', 'show']);
 Route::post('/answers/{answer}/accept', AcceptAnswerController::class)->name('answers.accept');
 Route::post('/questions/{question}/favourites', [FavouritesController::class, 'store'])->name('questions.favourite');
 Route::delete('/questions/{question}/favourites', [FavouritesController::class, 'destroy'])->name('questions.unfavourite');

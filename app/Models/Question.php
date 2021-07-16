@@ -32,7 +32,8 @@ class Question extends Model
     protected $appends = [
         'created_date',
         'is_favourited',
-        'favourites_count'
+        'favourites_count',
+        'body_html'
     ];
 
     /**

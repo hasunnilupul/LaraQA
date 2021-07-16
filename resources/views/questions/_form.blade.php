@@ -17,8 +17,6 @@
             <div class="col-span-6" x-data="{question-body:''}">
                 <label for="body" class="block text-sm font-medium text-gray-700">
                     Brief description
-                    <span x-text="question-body.length+'/1000'" class="text-xs font-normal sm:ml-auto"
-                        :class="{'text-blue-700':question-body.length<1000, 'text-red-500':question-body.length>=1000}"></span>
                 </label>
                 <div class="mt-1">
                     <textarea id="body" x-model="body" name="body" rows="10" maxlength="1000"

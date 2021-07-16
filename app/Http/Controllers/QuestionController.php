@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Gate;
 class QuestionController extends Controller
 {
 
-    public function __construct() {
-        $this->middleware('auth', ['except'=>['index','show']]);
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
     }
     /**
      * Display a listing of the resource.
@@ -42,8 +43,8 @@ class QuestionController extends Controller
      */
     public function store(AskQuestionRequest $request)
     {
-        $request->user()->questions()->create($request->only(['title','body']));
-        return redirect()->route('questions.index')->with('success','Your question has been submited');
+        $request->user()->questions()->create($request->only(['title', 'body']));
+        return redirect()->route('questions.index')->with('success', 'Your question has been submited');
     }
 
     /**
@@ -80,7 +81,16 @@ class QuestionController extends Controller
     public function update(AskQuestionRequest $request, Question $question)
     {
         $this->authorize('update', $question);
-        $question->update($request->only('title','body'));
+        $question->update($request->only('title', 'body'));
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Your question has been updated.',
+                'title' => $question->title,
+                'body_html' => $question->body_html
+            ]);
+        }
+
         return redirect()->route('questions.index')->with('success', 'Your question has been updated.');
     }
 
@@ -94,6 +104,13 @@ class QuestionController extends Controller
     {
         $this->authorize('delete', $question);
         $question->delete();
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'message' => 'Your question has been deleted.',
+            ]);
+        }
+
         return redirect()->route('questions.index')->with('success', 'Your question has been deleted.');
     }
 }

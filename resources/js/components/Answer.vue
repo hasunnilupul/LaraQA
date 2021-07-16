@@ -141,7 +141,7 @@
           </button>
         </div>
         <div class="flex flex-col justify-end">
-          <user-info :model="answer" :label="'Answered'"/>
+          <user-info :model="answer" :label="'Answered'" />
         </div>
       </div>
     </div>
@@ -206,16 +206,13 @@ export default {
           [
             "<button><b>YES</b></button>",
             (instance, toast) => {
-              axios.delete(this.endpoint)
-                .then((res) => {
-                  this.$emit("deleted");
-                  $(this.$el).fadeOut(500, () => {
-                    this.$toast.success(res.data.message, "Success", {
-                      position: "topRight",
-                      timeout: 3000,
-                    });
-                  });
+              axios.delete(this.endpoint).then((res) => {
+                this.$emit("deleted");
+                this.$toast.success(res.data.message, "Success", {
+                  position: "topRight",
+                  timeout: 3000,
                 });
+              });
               instance.hide({ transitionOut: "fadeOut" }, toast, "button");
             },
             true,

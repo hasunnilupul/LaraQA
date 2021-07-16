@@ -27,17 +27,6 @@
                         Edit
                     </a>
                 @endcan
-                @can('delete', $question)
-                    <form action="{{ route('questions.destroy', $question->id) }}" method="post">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit"
-                            class="px-2 py-1 border border-red-500 text-gray-600 rounded text-sm font-semibold hover:bg-red-500 hover:text-gray-100"
-                            onclick="return confirm('Are you sure?')">
-                            Delete
-                        </button>
-                    </form>
-                @endcan
             </div>
         </div>
         <div class="flex items-baseline mt-1 sm:mt-0 text-sm text-gray-500">
