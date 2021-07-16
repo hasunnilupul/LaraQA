@@ -3845,6 +3845,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "accept-answer",
   props: ["answer"],
@@ -4146,6 +4147,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Answer_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Answer.vue */ "./resources/js/components/Answer.vue");
 /* harmony import */ var _NewAnswer_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewAnswer.vue */ "./resources/js/components/NewAnswer.vue");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4172,16 +4209,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "answers",
-  props: ["answers", "count"],
+  props: ["question"],
   components: {
     Answer: _Answer_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     NewAnswer: _NewAnswer_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
   data: function data() {
     return {
-      data: this.answers,
-      answers_count: this.count
+      questionId: this.question.id,
+      answers_count: this.question.answers_count,
+      answers: [],
+      nextUrl: null
     };
+  },
+  created: function created() {
+    this.fetch("/questions/".concat(this.questionId, "/answers"));
   },
   computed: {
     title: function title() {
@@ -4189,12 +4231,27 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    fetch: function fetch(uri) {
+      var _this = this;
+
+      axios.get(uri).then(function (_ref) {
+        var _this$answers;
+
+        var data = _ref.data;
+
+        (_this$answers = _this.answers).push.apply(_this$answers, _toConsumableArray(data.data));
+
+        _this.nextUrl = data.next_page_url;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
     deleteAnswer: function deleteAnswer() {
       this.answers_count--;
     },
     addNewAnswer: function addNewAnswer(answer) {
       this.answers_count++;
-      this.data.push(answer);
+      this.answers.push(answer);
     }
   }
 });
@@ -4330,8 +4387,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    questionId: function questionId() {
+      return this.id;
+    },
     endpoint: function endpoint() {
-      return "/questions/".concat(this.id, "/answers");
+      return "/questions/".concat(this.questionId, "/answers");
     }
   },
   methods: {
@@ -33956,10 +34016,11 @@ var render = function() {
       ? _c(
           "button",
           {
+            staticClass: "cursor-default",
             class: _vm.classes,
             attrs: {
               type: "button",
-              title: "Marked as the best answer by answer owner",
+              title: "Marked as the best answer by question owner",
               onclick: "event.preventDefault();"
             }
           },
@@ -34201,7 +34262,7 @@ var render = function() {
         ? _c(
             "div",
             { staticClass: "answers-list" },
-            _vm._l(_vm.data, function(answer) {
+            _vm._l(_vm.answers, function(answer) {
               return _c("answer", {
                 key: answer.id,
                 attrs: { answer: answer },
@@ -34212,8 +34273,27 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
+      _vm.nextUrl
+        ? _c("div", { staticClass: "text-center my-3" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "\n        px-2\n        py-1\n        border border-gray-500\n        shadow-sm\n        text-gray-600\n        rounded\n        text-sm\n        font-semibold\n        hover:bg-gray-500\n        focus:bg-gray-500\n        hover:text-gray-100\n        focus:text-gray-100\n        cursor-pointer\n      ",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.fetch(_vm.nextUrl)
+                  }
+                }
+              },
+              [_vm._v("\n      Load More\n    ")]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c("new-answer", {
-        attrs: { id: _vm.data[0].question_id },
+        attrs: { id: _vm.questionId },
         on: { added: _vm.addNewAnswer }
       })
     ],

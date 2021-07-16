@@ -10,6 +10,22 @@ use Illuminate\Support\Facades\Auth;
 class AnswerController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
+    /**
+     * Get all resources in storage.
+     *
+     * @param  \App\Models\Question  $question
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Question $question)
+    {
+        return $question->answers()->with('user')->simplePaginate(3);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

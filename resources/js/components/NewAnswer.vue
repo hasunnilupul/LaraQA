@@ -34,8 +34,11 @@ export default {
         }
     },
     computed: {
+        questionId(){
+            return this.id;
+        },
         endpoint(){
-            return `/questions/${this.id}/answers`;
+            return `/questions/${this.questionId}/answers`;
         },
     },
     methods: {

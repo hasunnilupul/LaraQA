@@ -9,14 +9,38 @@
     <hr class="border-gray-300" />
     <div v-if="answers_count" class="answers-list">
       <answer
-        v-for="answer in data"
+        v-for="answer in answers"
         :answer="answer"
         :key="answer.id"
         v-on:deleted="deleteAnswer"
       />
     </div>
 
-    <new-answer :id="data[0].question_id" @added="addNewAnswer" />
+    <div v-if="nextUrl" class="text-center my-3">
+      <button
+        @click="fetch(nextUrl)"
+        type="button"
+        class="
+          px-2
+          py-1
+          border border-gray-500
+          shadow-sm
+          text-gray-600
+          rounded
+          text-sm
+          font-semibold
+          hover:bg-gray-500
+          focus:bg-gray-500
+          hover:text-gray-100
+          focus:text-gray-100
+          cursor-pointer
+        "
+      >
+        Load More
+      </button>
+    </div>
+
+    <new-answer :id="questionId" @added="addNewAnswer" />
   </div>
 </template>
 
@@ -26,16 +50,21 @@ import NewAnswer from "./NewAnswer.vue";
 
 export default {
   name: "answers",
-  props: ["answers", "count"],
+  props: ["question"],
   components: {
     Answer,
     NewAnswer,
   },
   data() {
     return {
-      data: this.answers,
-      answers_count: this.count,
+      questionId: this.question.id,
+      answers_count: this.question.answers_count,
+      answers: [],
+      nextUrl: null,
     };
+  },
+  created() {
+    this.fetch(`/questions/${this.questionId}/answers`);
   },
   computed: {
     title() {
@@ -47,12 +76,23 @@ export default {
     },
   },
   methods: {
+    fetch(uri) {
+      axios
+        .get(uri)
+        .then(({ data }) => {
+          this.answers.push(...data.data);
+          this.nextUrl = data.next_page_url;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     deleteAnswer() {
       this.answers_count--;
     },
     addNewAnswer(answer) {
       this.answers_count++;
-      this.data.push(answer);
+      this.answers.push(answer);
     },
   },
 };

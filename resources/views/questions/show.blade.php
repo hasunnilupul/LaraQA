@@ -14,8 +14,8 @@
         <div class="max-w-7xl mx-auto sm:px-4 lg:px-5">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-sm">
                 <div class="flex justify-start items-start p-4 border border-gray-200 text-gray-600">
-                    <vote name="question" :model="{{$question}}" iconsize="w-10 h-10"></vote>
-                    
+                    <vote name="question" :model="{{ $question }}" iconsize="w-10 h-10"></vote>
+
                     <div class="flex flex-grow flex-col items-start justify-center pl-3">
                         {!! $question->body_html !!}
                         <div class="flex flex-col justify-center items-end w-full mt-2">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <answers :answers="{{$question->answers}}" :count="{{$question->answers_count}}"/>
+            <answers :question="{{ $question }}" />
         </div>
     </div>
 </x-app-layout>

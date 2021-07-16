@@ -36,6 +36,7 @@
 <body class="font-sans antialiased">
     <div id="app" class="min-h-screen bg-gray-100">
         @include('layouts.navigation')
+        <!-- <navigation/> -->
 
         <!-- Page Heading -->
         <header class="bg-white shadow">

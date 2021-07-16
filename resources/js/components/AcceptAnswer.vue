@@ -22,8 +22,9 @@
     <button
       v-if="accepted"
       type="button"
-      title="Marked as the best answer by answer owner"
+      title="Marked as the best answer by question owner"
       :class="classes"
+      class="cursor-default"
       onclick="event.preventDefault();"
     >
       <svg
