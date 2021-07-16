@@ -4256,13 +4256,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         console.log(err);
       });
     },
+    addAnswer: function addAnswer(answer) {
+      this.answers.push(answer);
+      this.answers_count++;
+    },
     deleteAnswer: function deleteAnswer(index) {
       this.answers.splice(index, 1);
       this.answers_count--;
-    },
-    addNewAnswer: function addNewAnswer(answer) {
-      this.answers.push(answer);
-      this.answers_count++;
     }
   }
 });
@@ -4398,6 +4398,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    isInvalid: function isInvalid() {
+      return !this.signedIn || this.body.length < 10;
+    },
     questionId: function questionId() {
       return this.id;
     },
@@ -4411,16 +4414,18 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post(this.endpoint, {
         body: this.body
-      }).then(function (res) {
-        _this.$emit('added', res.data.answer);
+      }).then(function (_ref) {
+        var data = _ref.data;
 
-        _this.$toast.success(res.data.message, 'Success', {
+        _this.$toast.success(data.message, 'Success', {
           position: 'topRight',
           timeout: 3000
         });
 
         _this.error = null;
         _this.body = '';
+
+        _this.$emit('created', data.answer);
       })["catch"](function (err) {
         _this.$toast.error('Something went wrong. Please try again later.', 'Error', {
           position: 'topRight',
@@ -4545,7 +4550,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      count: this.model.votes_count,
+      count: this.model.votes_count || 0,
       id: this.model.id
     };
   },
@@ -34327,7 +34332,7 @@ var render = function() {
       _vm._v(" "),
       _c("new-answer", {
         attrs: { id: _vm.questionId },
-        on: { added: _vm.addNewAnswer }
+        on: { created: _vm.addAnswer }
       })
     ],
     1
@@ -34444,13 +34449,15 @@ var render = function() {
               ],
               staticClass:
                 "mt-1 block w-full shadow-sm sm:text-sm text-gray-600 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md",
+              class: { "focus:ring-red-500 focus:border-red-500": _vm.error },
               attrs: {
                 id: "body",
                 name: "body",
                 rows: "7",
                 maxlength: "1000",
                 placeholder:
-                  "You are going to post an answer for this question."
+                  "You are going to post an answer for this question.",
+                required: ""
               },
               domProps: { value: _vm.body },
               on: {
@@ -34475,29 +34482,22 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "px-4 py-3 text-right sm:px-6" }, [
+          _c(
+            "button",
+            {
+              staticClass:
+                "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:cursor-not-allowed",
+              attrs: { disabled: _vm.isInvalid, type: "submit" }
+            },
+            [_vm._v("\n                Post answer\n            ")]
+          )
+        ])
       ]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "px-4 py-3 text-right sm:px-6" }, [
-      _c(
-        "button",
-        {
-          staticClass:
-            "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("\n                Post answer\n            ")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

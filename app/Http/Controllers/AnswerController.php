@@ -42,7 +42,7 @@ class AnswerController extends Controller
         if ($request->expectsJson()) {
             return response()->json([
                 'message' => 'Your answer has been submitted successfully.',
-                'answer' => Answer::with('user')->find($answer->id)
+                'answer' => $answer->load('user')
             ]);
         }
 

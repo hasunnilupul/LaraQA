@@ -19,6 +19,7 @@ module.exports = {
         extend: {
             opacity: ['disabled'],
             borderWidth: ['last'],
+            cursor: ['disabled'],
         },
     },
 

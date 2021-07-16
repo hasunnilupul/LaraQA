@@ -40,7 +40,7 @@
       </button>
     </div>
 
-    <new-answer :id="questionId" @added="addNewAnswer" />
+    <new-answer :id="questionId" @created="addAnswer" />
   </div>
 </template>
 
@@ -87,13 +87,13 @@ export default {
           console.log(err);
         });
     },
+    addAnswer(answer) {
+      this.answers.push(answer);
+      this.answers_count++;
+    },
     deleteAnswer(index) {
       this.answers.splice(index, 1);
       this.answers_count--;
-    },
-    addNewAnswer(answer) {
-      this.answers.push(answer);
-      this.answers_count++;
     },
   },
 };
