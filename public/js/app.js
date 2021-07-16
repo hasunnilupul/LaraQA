@@ -4246,12 +4246,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         console.log(err);
       });
     },
-    deleteAnswer: function deleteAnswer() {
+    deleteAnswer: function deleteAnswer(index) {
+      this.answers.splice(index, 1);
       this.answers_count--;
     },
     addNewAnswer: function addNewAnswer(answer) {
-      this.answers_count++;
       this.answers.push(answer);
+      this.answers_count++;
     }
   }
 });
@@ -34262,11 +34263,15 @@ var render = function() {
         ? _c(
             "div",
             { staticClass: "answers-list" },
-            _vm._l(_vm.answers, function(answer) {
+            _vm._l(_vm.answers, function(answer, index) {
               return _c("answer", {
                 key: answer.id,
                 attrs: { answer: answer },
-                on: { deleted: _vm.deleteAnswer }
+                on: {
+                  deleted: function($event) {
+                    return _vm.deleteAnswer(index)
+                  }
+                }
               })
             }),
             1

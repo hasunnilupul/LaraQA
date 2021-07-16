@@ -9,10 +9,10 @@
     <hr class="border-gray-300" />
     <div v-if="answers_count" class="answers-list">
       <answer
-        v-for="answer in answers"
+        v-for="(answer, index) in answers"
         :answer="answer"
         :key="answer.id"
-        v-on:deleted="deleteAnswer"
+        @deleted="deleteAnswer(index)"
       />
     </div>
 
@@ -87,12 +87,13 @@ export default {
           console.log(err);
         });
     },
-    deleteAnswer() {
+    deleteAnswer(index) {
+      this.answers.splice(index, 1);
       this.answers_count--;
     },
     addNewAnswer(answer) {
-      this.answers_count++;
       this.answers.push(answer);
+      this.answers_count++;
     },
   },
 };
