@@ -55,7 +55,7 @@ class User extends Authenticatable
     /**
      * Get all of the questions for the User
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function questions(): HasMany
     {
@@ -70,7 +70,7 @@ class User extends Authenticatable
     /**
      * Get all of the answers for the User
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function answers(): HasMany
     {
@@ -88,7 +88,7 @@ class User extends Authenticatable
     /**
      * The favourite questions of the the User
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     public function favourites(): BelongsToMany
     {

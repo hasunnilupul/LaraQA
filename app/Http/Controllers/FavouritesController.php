@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class FavouritesController extends Controller
 {
@@ -15,8 +16,8 @@ class FavouritesController extends Controller
     /**
      * favourite the question
      *
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
+     * @param Question $question
+     * @return Response
      */
     public function store(Question $question)
     {
@@ -31,8 +32,8 @@ class FavouritesController extends Controller
     /**
      * unfavourite the question
      *
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
+     * @param Question $question
+     * @return Response
      */
     public function destroy(Question $question)
     {

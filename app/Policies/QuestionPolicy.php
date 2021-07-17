@@ -13,8 +13,8 @@ class QuestionPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Question  $question
+     * @param User $user
+     * @param Question $question
      * @return mixed
      */
     public function update(User $user, Question $question)
@@ -25,8 +25,8 @@ class QuestionPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Question  $question
+     * @param User $user
+     * @param Question $question
      * @return mixed
      */
     public function delete(User $user, Question $question)

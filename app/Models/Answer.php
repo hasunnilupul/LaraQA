@@ -46,11 +46,11 @@ class Answer extends Model
             $answer->question->decrement('answers_count');
         });
     }
-    
+
     /**
      * Get the question that owns the Answer
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function question(): BelongsTo
     {
@@ -60,7 +60,7 @@ class Answer extends Model
     /**
      * Get the user that owns the Answer
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user(): BelongsTo
     {

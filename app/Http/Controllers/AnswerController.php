@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class AnswerController extends Controller
@@ -18,8 +19,8 @@ class AnswerController extends Controller
     /**
      * Get all resources in storage.
      *
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
+     * @param Question $question
+     * @return Response
      */
     public function index(Question $question)
     {
@@ -29,9 +30,9 @@ class AnswerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Question $question
+     * @return Response
      */
     public function store(Question $question, Request $request)
     {
@@ -52,8 +53,8 @@ class AnswerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Answer  $answer
-     * @return \Illuminate\Http\Response
+     * @param Answer $answer
+     * @return Response
      */
     public function edit(Question $question, Answer $answer)
     {
@@ -64,9 +65,9 @@ class AnswerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Answer  $answer
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Answer $answer
+     * @return Response
      */
     public function update(Request $request, Question $question, Answer $answer)
     {
@@ -85,8 +86,8 @@ class AnswerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Answer  $answer
-     * @return \Illuminate\Http\Response
+     * @param Answer $answer
+     * @return Response
      */
     public function destroy(Question $question, Answer $answer)
     {

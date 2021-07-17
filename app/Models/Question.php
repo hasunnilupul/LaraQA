@@ -13,7 +13,7 @@ class Question extends Model
 {
     use HasFactory;
     use VotableTrait;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -39,7 +39,7 @@ class Question extends Model
     /**
      * Get the user that owns the Question
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -81,7 +81,7 @@ class Question extends Model
     /**
      * Get all of the answers for the Question
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function answers(): HasMany
     {
@@ -97,7 +97,7 @@ class Question extends Model
     /**
      * The users that favourited the Question
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     public function favourites(): BelongsToMany
     {

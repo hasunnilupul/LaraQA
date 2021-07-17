@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AskQuestionRequest;
 use App\Models\Question;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Response;
 
 class QuestionController extends Controller
 {
@@ -16,7 +16,7 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -27,7 +27,7 @@ class QuestionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -38,8 +38,8 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\AskQuestionRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param AskQuestionRequest $request
+     * @return Response
      */
     public function store(AskQuestionRequest $request)
     {
@@ -50,8 +50,8 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
+     * @param Question $question
+     * @return Response
      */
     public function show(Question $question)
     {
@@ -62,8 +62,8 @@ class QuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
+     * @param Question $question
+     * @return Response
      */
     public function edit(Question $question)
     {
@@ -74,9 +74,9 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\AskQuestionRequest  $request
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
+     * @param AskQuestionRequest $request
+     * @param Question $question
+     * @return Response
      */
     public function update(AskQuestionRequest $request, Question $question)
     {
@@ -97,8 +97,8 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
+     * @param Question $question
+     * @return Response
      */
     public function destroy(Question $question)
     {
